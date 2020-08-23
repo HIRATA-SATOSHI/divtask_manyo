@@ -22,6 +22,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         task = FactoryBot.create(:second_task, name: 'task')
+        task = FactoryBot.create(:second_task, name: 'task2')
         visit tasks_path
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
@@ -34,8 +35,11 @@ RSpec.describe 'タスク管理機能', type: :system do
     #テストで内容を追加 issues#2
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
+        task = FactoryBot.create(:second_task, name: 'task')
+        task = FactoryBot.create(:second_task, name: 'task2')
         visit tasks_path
-        task_list= all('.task_row')
+        task_list= all('.task_list')
+        save_and_open_page
         expect(task_list[0]).to have_content 'task2'
         expect(task_list[1]).to have_content 'task'       
       end
