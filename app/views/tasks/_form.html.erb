@@ -20,7 +20,10 @@
     <%= form.label :detail %>
     <%= form.text_area :detail %>
   </div>
-
+  <div class="task_list">
+    <%= form.label :deadline %>
+    <%= form.date_field :deadline %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
