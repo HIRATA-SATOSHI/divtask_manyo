@@ -4,7 +4,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(params[:sort])
+    if params[:sort_deadline]
+      @tasks = @tasks.sort_deadline 
+    else
+      @tasks =Task.all
+    end
+
   end
 
   # GET /tasks/1
