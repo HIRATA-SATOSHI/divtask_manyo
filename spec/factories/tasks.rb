@@ -10,6 +10,6 @@ FactoryBot.define do
     # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
     factory :second_task, class: Task do
       name { 'Factoryで作ったデフォルトのタイトル２' }
-      details { 'Factoryで作ったデフォルトのコンテント２' }
+      detail { 'Factoryで作ったデフォルトのコンテント２' }
     end
   end
