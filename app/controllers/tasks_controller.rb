@@ -4,14 +4,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order(params[:sort])
-    if params[:sort_deadline]
-      @tasks = @tasks.sort_deadline 
+    if params[:sort_expired]
+      @tasks = Task.all.order('deadline DESC')
     else
-      @tasks =Task.all
+      @tasks = Task.all.oreder
     end
-
   end
+
 
   # GET /tasks/1
   # GET /tasks/1.json
