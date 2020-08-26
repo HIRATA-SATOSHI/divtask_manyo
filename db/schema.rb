@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_124136) do
     t.text "detail", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "deadline", default: "", null: false
+    t.date "deadline", null: false
   end
 
 end

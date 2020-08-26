@@ -5,10 +5,11 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order('deadline DESC')
+      @tasks = Task.order(deadline: :desc)
     else
-      @tasks = Task.all.oreder
+      @tasks = Task.order(created_at: :desc)
     end
+    # binding.pry
   end
 
 
