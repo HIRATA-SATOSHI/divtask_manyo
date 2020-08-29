@@ -2,6 +2,20 @@
 
 <h1>Task List</h1>
 
+
+<h4>Task Search<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
+  <%= form.text_field :name %>
+  <%= form.submit 'Search', name: nil %>
+<% end %>
+<h4/>
+
+<h4>Status Search<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
+  <%= form.select :status, [["未着手", "not_yet"], ["進行中", "in_progress"], ["完了", "completed"]], include_blank: "選択して下さい" %>
+  <%= form.submit 'Search', name: nil %>
+<% end %> 
+</h4> 
+
+<br>
 <table>
   <thead>
     <tr>
@@ -20,8 +34,8 @@
         <td class = "task_list" ><%= task.name %></td>
         <td><%= task.detail %></td>
         <td><%= task.deadline %></td>
-        <td><%= task.status %></td>
-        <td><%= task.priority %></td>
+        <td><%= task.status_i18n %></td>
+        <td><%= task.priority_i18n %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -4,19 +4,24 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
+    @tasks = Task.all.order(created_at: :desc)
+    # binding.irb
     if params[:sort_expired]
-      @tasks = Task.order(deadline: :desc)
+      @tasks = Task.all
+      @tasks = @tasks.order(deadline: :desc)
     else
-      @tasks = Task.order(created_at: :desc)
+      @tasks = Task.all
+      @tasks = @tasks.order(created_at: :asc)
     end
+    @tasks = @tasks.where('name LIKE ?', "%#{params[:task][:name]}%") if params[:task].present?  
     # binding.pry
   end
-
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
   end
+  
 
   # GET /tasks/new
   def new

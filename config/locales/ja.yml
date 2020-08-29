@@ -20,7 +20,7 @@ ja:
 
     task:
       status:
-        no_yet: 未着手
+        not_yet: 未着手
         in_progress: 着手中
         completed: 完了
       priority:
