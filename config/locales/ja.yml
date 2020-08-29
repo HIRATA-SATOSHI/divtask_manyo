@@ -21,7 +21,7 @@ ja:
     task:
       status:
         not_yet: 未着手
-        in_progress: 着手中
+        in_progress: 進行中
         completed: 完了
       priority:
         high: 高

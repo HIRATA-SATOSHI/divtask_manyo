@@ -4,17 +4,35 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order(created_at: :desc)
-    # binding.irb
+    # @tasks = Task.all.order(created_at: :desc)
     if params[:sort_expired]
       @tasks = Task.all
       @tasks = @tasks.order(deadline: :desc)
     else
       @tasks = Task.all
-      @tasks = @tasks.order(created_at: :asc)
+      @tasks = @tasks.order(created_at: :desc)
+    end  
+
+    if params[:sort_priority_high]
+      @tasks = Task.all
+      @tasks = @tasks.order(priority: :asc)
     end
-    @tasks = @tasks.where('name LIKE ?', "%#{params[:task][:name]}%") if params[:task].present?  
-    # binding.pry
+
+    if params[:task].present?
+      if params[:task][:name].present? && params[:task][:status].present?
+        #両方name and statusが成り立つ検索結果を返す
+        @tasks = @tasks.where('name LIKE ?', "%#{params[:task][:name]}%")
+        @tasks =@tasks.where(status: params[:task][:status])
+        
+        #渡されたパラメータがtask nameのみだったとき
+      elsif params[:task][:name].present?
+        @tasks = @tasks.where('name LIKE ?', "%#{params[:task][:name]}%")
+      
+       #渡されたパラメータがステータスのみだったとき
+      elsif params[:task][:status].present?
+        @tasks =@tasks.where(status: params[:task][:status])
+      end
+    end
   end
 
   # GET /tasks/1
