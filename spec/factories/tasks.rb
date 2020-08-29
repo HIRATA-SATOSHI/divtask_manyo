@@ -5,11 +5,19 @@ FactoryBot.define do
     factory :task do
       name { 'Factoryで作ったデフォルトのタイトル１' }
       detail { 'Factoryで作ったデフォルトのコンテント１' }
+      deadline { DateTime.now }
     end
     # 作成するテストデータの名前を「second_task」とします
     # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
     factory :second_task, class: Task do
       name { 'Factoryで作ったデフォルトのタイトル２' }
       detail { 'Factoryで作ったデフォルトのコンテント２' }
+      deadline { DateTime.tomorrow }
     end
+
+    factory :third_task, class: Task do
+      name { 'Factoryで作ったデフォルトのタイトル２' }
+      detail { 'Factoryで作ったデフォルトのコンテント２' }
+      deadline { DateTime.now.since(5.days) }
+    end    
   end

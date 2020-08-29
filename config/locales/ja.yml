@@ -7,6 +7,27 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  enums:
+    tasks:
+      status:
+        not_yet: 未着手
+        in_progress: 進行中
+        completed: 完了
+      priority:
+        high: 高
+        middle: 中
+        low: 低    
+
+    task:
+      status:
+        no_yet: 未着手
+        in_progress: 着手中
+        completed: 完了
+      priority:
+        high: 高
+        middle: 中
+        low: 低   
+            
   date:
     abbr_day_names:
     - 日

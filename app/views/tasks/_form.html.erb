@@ -20,12 +20,26 @@
     <%= form.label :detail %>
     <%= form.text_area :detail %>
   </div>
+
   <div class="task_list">
     <%= form.label :deadline %>
     <%= form.date_field :deadline %>
+  </di
+  <div class="task_list">
+    <%= form.label :status %>
+  
+    <%= form.select :status, Task.statuses.keys.map {|k| [I18n.t("enums.tasks.status.#{k}"), k]}, include_blank: "選択して下さい" %>
   </div>
+
+  <div class="task_list">
+  <%= form.label :priority %>
+  <%= form.select :priority, Task.priorities.keys.map {|k| [I18n.t("enums.tasks.priority.#{k}"), k]}, include_blank: "選択して下さい" %>
+</div>
+
   <br>
+
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>
