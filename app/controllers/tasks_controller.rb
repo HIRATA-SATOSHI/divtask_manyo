@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       @tasks = Task.all
       @tasks = @tasks.order(priority: :asc)
     end
-
+  
     if params[:task].present?
       if params[:task][:name].present? && params[:task][:status].present?
         #両方name and statusが成り立つ検索結果を返す

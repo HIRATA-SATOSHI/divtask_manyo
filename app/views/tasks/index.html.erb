@@ -5,12 +5,10 @@
 
 <h4>Task Search<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
   <%= form.text_field :name %>
-  <%= form.submit 'Search', name: nil %>
-<% end %>
 <h4/>
 
-<h4>Status Search<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
-  <%= form.select :status, [["未着手", "not_yet"], ["進行中", "in_progress"], ["完了", "completed"]], include_blank: "選択して下さい" %>
+<h4>Status Search
+  <%= form.select :status, [["未着手", "0"], ["進行中", "1"], ["完了", "2"]], include_blank: "選択して下さい" %>
   <%= form.submit 'Search', name: nil %>
 <% end %> 
 </h4> 

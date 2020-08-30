@@ -1,16 +1,46 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  # let!(:task) = FactoryBot.create(:task, name: 'task')
-  before do
-    # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
-    visit tasks_path
+    before do
+      # 「一覧画面に遷移した場合」や「タスクが作成日時の降順に並んでいる場合」など、contextが実行されるタイミングで、before内のコードが実行される
+      visit tasks_path
+    end
+  describe '検索機能' do
+    before do
+      # 必要に応じて、テストデータの内容を変更して構わない
+      FactoryBot.create(:task, title: "task")
+      FactoryBot.create(:second_task, title:"test")
+      FactoryBot.create(:third_task, title: "task3")
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        visit tasks_path
+        # タスクの検索欄に検索ワードを入力する (例: task)
+        fill_in 'task_name_search', with: 'task'
+        # 検索ボタンを押す
+        click_on 'Search' 
+        expect(page).to have_content 'task'
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        visit tasks_path
+        # ここに実装する プルダウンを選択する「select」について調べてみること
+        select "未着手", from: "search_status"
+        click_on 'Search'
+        expect(page).to have_content '未着手'
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        visit tasks_path
+        # ここに実装する
+        fill_in 'task_name_search', with: 'task'
+        select "未着手", from: "search_status"
+        click_on 'Search'
+        expect(page).to have_content 'task', "未着手"
+      end
+    end
   end
-
-  # before do
-    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
-  #   Task.create!(name: 'test_task_01', detail: 'test_content_01')
-  #   Task.create!(name: 'test_task_02', detail: 'test_content_01')
-  # end
 
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
@@ -51,7 +81,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '終了期限でソートした場合'
       it 'タスクが終了期限順に並んでいる' do
         visit tasks_path
-        click_on '終了期限でソートする' do
+        click_on '終了期限でソートする' 
         visit tasks_path(sort_expired: "true")
         task_list = all('.task_list')
         expect(task_list[0]).to have_content 'Factoryで作ったデフォルトのタイトル３'
@@ -60,6 +90,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end 
   end
+
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
