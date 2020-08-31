@@ -7,15 +7,15 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '検索機能' do
     before do
       # 必要に応じて、テストデータの内容を変更して構わない
-      FactoryBot.create(:task, title: "task")
-      FactoryBot.create(:second_task, title:"test")
-      FactoryBot.create(:third_task, title: "task3")
+      FactoryBot.create(:task, name: "task")
+      FactoryBot.create(:second_task, name:"test")
+      FactoryBot.create(:third_task, name: "task3")
     end
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
         # タスクの検索欄に検索ワードを入力する (例: task)
-        fill_in 'task_name_search', with: 'task'
+        fill_in 'task[name]', with: 'task'
         # 検索ボタンを押す
         click_on 'Search' 
         expect(page).to have_content 'task'
@@ -25,7 +25,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "ステータスに完全一致するタスクが絞り込まれる" do
         visit tasks_path
         # ここに実装する プルダウンを選択する「select」について調べてみること
-        select "未着手", from: "search_status"
+        select "未着手", from: "task_status"
         click_on 'Search'
         expect(page).to have_content '未着手'
       end
@@ -34,10 +34,11 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
         visit tasks_path
         # ここに実装する
-        fill_in 'task_name_search', with: 'task'
-        select "未着手", from: "search_status"
+        fill_in 'task[name]', with: 'task'
+        select "未着手", from: "task_status"
         click_on 'Search'
-        expect(page).to have_content 'task', "未着手"
+        expect(page).to have_content 'task'
+        expect(page).to have_content '未着手'
       end
     end
   end
@@ -78,7 +79,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
 
-    context '終了期限でソートした場合'
+    context '終了期限でソートした場合' do
       it 'タスクが終了期限順に並んでいる' do
         visit tasks_path
         click_on '終了期限でソートする' 
