@@ -15,7 +15,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
         # タスクの検索欄に検索ワードを入力する (例: task)
-        fill_in 'task[name]', with: 'task'
+        fill_in 'task_name', with: 'task'
         # 検索ボタンを押す
         click_on 'Search' 
         expect(page).to have_content 'task'
@@ -34,10 +34,10 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
         visit tasks_path
         # ここに実装する
-        fill_in 'task[name]', with: 'task'
+        fill_in 'task_name', with: 'test'
         select "未着手", from: "task_status"
         click_on 'Search'
-        expect(page).to have_content 'task'
+        expect(page).to have_content 'test'
         expect(page).to have_content '未着手'
       end
     end
@@ -54,8 +54,8 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成済みのタスク一覧が表示される' do
         task = FactoryBot.create(:task, name: 'task')
         task = FactoryBot.create(:second_task, name: 'task2')
-        task = FactoryBot.create(:third_task, name: 'task3')
         visit tasks_path
+        task_list= all('.task_list')
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
         expect(page).to have_content 'task'
@@ -85,9 +85,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_on '終了期限でソートする' 
         visit tasks_path(sort_expired: "true")
         task_list = all('.task_list')
-        expect(task_list[0]).to have_content 'Factoryで作ったデフォルトのタイトル３'
-        expect(task_list[1]).to have_content 'Factoryで作ったデフォルトのタイトル２'
-        expect(task_list[2]).to have_content 'Factoryで作ったデフォルトのタイトル１'
+        expect(task_list[0]).to have_content 'Factoryで作ったデフォルトのタイトル3'
+        expect(task_list[1]).to have_content 'Factoryで作ったデフォルトのタイトル2'
+        expect(task_list[2]).to have_content 'Factoryで作ったデフォルトのタイトル1'
       end
     end 
   end
