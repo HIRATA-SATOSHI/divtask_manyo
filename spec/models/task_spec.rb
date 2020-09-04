@@ -17,8 +17,9 @@ describe 'タスクモデル機能', type: :model do
     end
     context 'タスクのタイトルと詳細に内容が記載されている場合' do
       it 'バリデーションが通る' do
-        # ここに内容を記載する
-        task = Task.new(name: 'hogehoge', detail: 'gehogeho')
+        task = FactoryBot.create(:task, name: 'task', detail: 'detail')
+        # task = Task.new(name: "hogehoge", detail: "gehogeho")
+        # binding.pry
         expect(task).to be_valid
       end
     end
