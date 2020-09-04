@@ -33,6 +33,8 @@ class TasksController < ApplicationController
         @tasks =@tasks.where(status: params[:task][:status])
       end
     end
+
+    @tasks = @tasks.page(params[:page]).per(3)
   end
 
   # GET /tasks/1
