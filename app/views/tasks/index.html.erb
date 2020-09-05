@@ -1,47 +1,33 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
-        <span class="sr-only">Bootstrap</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Task List
-      </a>
-    </div>
-    <div id="gnavi" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="">タスク登録</a></li>
-        <li><a href="">タスク一覧</a></li>
-        <li><a href="">アカウント詳細</a></li>
-        <li><a href="">ログアウト</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <p id="notice"><%= notice %></p>
 
-<h4>Task Search<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
-  <%= form.text_field :name %>
-<h4/>
+<div class = "container-fluid">
+  <ul class="row">
+    <li class="col-md-12">Task Search<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
+      <%= form.text_field :name %>
+    <li/>
+  
+    <li class="col-md-12">Status Search
+      <%= form.select :status, [["未着手", "0"], ["進行中", "1"], ["完了", "2"]], include_blank: "選択して下さい" %>
+      <%= form.submit 'Search', name: nil %>
+      <% end %> 
+    </li> 
+  </ul>
+</div>
 
-<h4>Status Search
-  <%= form.select :status, [["未着手", "0"], ["進行中", "1"], ["完了", "2"]], include_blank: "選択して下さい" %>
-  <%= form.submit 'Search', name: nil %>
-<% end %> 
-</h4> 
-
+<br>
+<button type="button" class="btn btn-warning btn-sm"><%= link_to 'タスク作成', new_task_path %></button>
 <br>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Detail</th>
-      <th>Deadline</th>
-      <th>Status</th>
-      <th>Priority</th>
+      <th>タスク</th>
+      <th>詳細</th>
+      <th>期限</th>
+      <th>ステータス</th>
+      <th>優先度</th>
+      <th>閲覧</th>
+      <th>編集</th>
+      <th>削除</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -56,7 +42,7 @@
         <td><%= task.priority_i18n %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Deliete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -64,8 +50,8 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
-<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
-<%= link_to "優先度高い順でソート", tasks_path(sort_priority_high: "true") %>
+
+<button type="button" class="btn btn-info btn-sm"><%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %></button>
+<button type="button" class="btn btn-info btn-sm"><%= link_to "優先度高い順でソート", tasks_path(sort_priority_high: "true") %></button>
 <br>
-<%= paginate @tasks %>
+<nav aria-label="Page navigation example"><%= paginate @tasks %></nav>

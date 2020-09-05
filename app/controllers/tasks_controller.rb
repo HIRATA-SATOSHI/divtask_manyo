@@ -34,7 +34,7 @@ class TasksController < ApplicationController
       end
     end
 
-    @tasks = @tasks.page(params[:page]).per(3)
+    @tasks = @tasks.page(params[:page]).per(5)
   end
 
   # GET /tasks/1
