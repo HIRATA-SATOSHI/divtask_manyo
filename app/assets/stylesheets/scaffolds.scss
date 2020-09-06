@@ -48,7 +48,7 @@ table {
 table th{
   text-align: center;
   color:white;
-  background: #3399FF;
+  background: #006699;
   border-left: 1px solid #EEEEEE;
   border-top: 1px solid #EEEEEE;
   border-bottom: 1px solid #EEEEEE;
@@ -60,11 +60,11 @@ table th{
 table td{
   text-align: center;
   color:white;
-  background: #8EB8FF;
+  background: #555555;
   border-left: 1px solid #EEEEEE;
   border-bottom: 1px solid #EEEEEE;
   border-top:none;
-  box-shadow: 0px -3px 5px 1px #A4C6FF inset;
+  box-shadow: 0px -3px 5px 1px #666666 inset;
   width: 25%;
   padding: 10px 0;
 }
@@ -83,9 +83,9 @@ table td{
 //   }
 // }
 
-// #notice {
-//   color: green;
-// }
+#notice {
+  color: green;
+}
 
 .field_with_errors {
   padding: 2px;
@@ -121,7 +121,7 @@ table td{
 // }
 
 .navbar {
-  background-color: #0066FF;
+  background-color: #006699;
   font-family: 'Rowdies', cursive;
   color: whitesmoke;
   top: 0;
@@ -142,9 +142,9 @@ ul {
 
 
 
-.btn btn-info btn-sm {
-  margin-bottom: 50px;
-}
+// .btn btn-info btn-sm {
+//   margin-bottom: 50px;
+// }
 
 footer {
   background-color:#9999CC;

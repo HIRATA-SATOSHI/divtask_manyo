@@ -2,21 +2,19 @@
 
 <div class = "container-fluid">
   <ul class="row">
-    <li class="col-md-12">Task Search<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
+    <li class="col-md-12">タスク検索<%= form_with(model: Task.new, method: :get, local: true, url: tasks_path) do |form| %>
       <%= form.text_field :name %>
     <li/>
+    <li class="col-md-12">ステータス検索</li>
+    <li><%= form.select :status, [["未着手", "0"], ["進行中", "1"], ["完了", "2"]], include_blank: "選択して下さい" %></li>
   
-    <li class="col-md-12">Status Search
-      <%= form.select :status, [["未着手", "0"], ["進行中", "1"], ["完了", "2"]], include_blank: "選択して下さい" %>
-      <%= form.submit 'Search', name: nil %>
-      <% end %> 
-    </li> 
+    <li>  
+    <button type="button" class="btn btn-dark"><%= form.submit '検索', name: nil %></button>
+    </li>  
+      <% end %>  
   </ul>
 </div>
 
-<br>
-<button type="button" class="btn btn-warning btn-sm"><%= link_to 'タスク作成', new_task_path %></button>
-<br>
 <table>
   <thead>
     <tr>
@@ -49,8 +47,9 @@
 </table>
 
 <br>
-
-
+<button type="button" class="btn btn-warning btn-sm"><%= link_to 'タスク作成', new_task_path %></button>
+<br>
+<br>
 <button type="button" class="btn btn-info btn-sm"><%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %></button>
 <button type="button" class="btn btn-info btn-sm"><%= link_to "優先度高い順でソート", tasks_path(sort_priority_high: "true") %></button>
 <br>

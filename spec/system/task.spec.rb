@@ -17,7 +17,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # タスクの検索欄に検索ワードを入力する (例: task)
         fill_in 'task_name', with: 'task'
         # 検索ボタンを押す
-        click_on 'Search' 
+        click_on '検索' 
         expect(page).to have_content 'task'
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         # ここに実装する プルダウンを選択する「select」について調べてみること
         select "未着手", from: "task_status"
-        click_on 'Search'
+        click_on '検索'
         expect(page).to have_content '未着手'
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # ここに実装する
         fill_in 'task_name', with: 'test'
         select "未着手", from: "task_status"
-        click_on 'Search'
+        click_on '検索'
         expect(page).to have_content 'test'
         expect(page).to have_content '未着手'
       end
