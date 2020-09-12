@@ -4,7 +4,7 @@
     <title>TaskManyo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <!-- コード追加　Bootstrap CSS読み込みコード-->
+    <!-- コード追加 Bootstrap CSS読み込みコード-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -36,6 +36,13 @@
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
+    <% if logged_in? %>
+      <%= link_to "Profile", user_path(current_user.id) %>
+      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+    <% else %>
+      <%= link_to "Sign up", new_user_path %>
+      <%= link_to "Login", new_session_path %>
+    <% end %> 
     <%= yield %>
   </body>
   <br>
