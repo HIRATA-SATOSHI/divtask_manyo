@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
   skip_before_action :login_required
   def new
-    if logged_in?
-      redirect_to tasks_path,notice:'すでにログインしています。'
+    unless logged_in?
+      @user = User.new
     else
-      @user = User.new 
+      redirect_to root_path, notice: 'すでにログインしています。'
     end
   end
 

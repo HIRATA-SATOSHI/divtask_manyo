@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TaskManyo</title>
+    <title>タスク管理</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <!-- コード追加 Bootstrap CSS読み込みコード-->
@@ -33,9 +33,9 @@
         </ul>
       </div>
     </nav>
-    <!--  <% flash.each do |key, value| %>
+    <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %> --!>
+    <% end %>
     <% if logged_in? %>
       <%= link_to "Profile", user_path(current_user.id) %>
       <%= link_to "Logout", session_path(current_user.id), method: :delete %>
