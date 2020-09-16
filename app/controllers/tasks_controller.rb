@@ -5,18 +5,17 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-      @tasks = current_user.tasks
     # @tasks = Task.all.order(created_at: :desc)
     if params[:sort_expired]
-      @tasks = Task.all
+      @tasks = current_user.tasks
       @tasks = @tasks.order(deadline: :desc)
     else
-      @tasks = Task.all
+      @tasks = current_user.tasks
       @tasks = @tasks.order(created_at: :desc)
     end  
 
     if params[:sort_priority_high]
-      @tasks = Task.all
+      @tasks = current_user.tasks      
       @tasks = @tasks.order(priority: :asc)
     end
   

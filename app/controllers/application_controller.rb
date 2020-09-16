@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    skip_before_action :login_required, only: [:new, :create]
+    before_action :login_required
     protect_from_forgery with: :exception
     include SessionsHelper
     
