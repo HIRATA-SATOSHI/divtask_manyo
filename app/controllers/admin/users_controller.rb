@@ -52,7 +52,6 @@ class Admin::UsersController < ApplicationController
 
   def require admin
       redirect_to root_path unless current_user.admin?
-    end
   end
   # def set_user
   #   @users = User.find(params[:id])
