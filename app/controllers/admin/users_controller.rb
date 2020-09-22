@@ -50,7 +50,13 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end
 
-  def set_user
-    @users = User.find(params[:id])
+  def if_not_admin
+    unless current_user.admin?
+      flash[:notice] = 'あなたは管理者ではありません'
+      redirect_to root_path
+    end
   end
+  # def set_user
+  #   @users = User.find(params[:id])
+  # end
 end

@@ -21,10 +21,9 @@
           <td><%= user.tasks.count %></td>
           <td><%= link_to 'Show', user %></td>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Deliete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
-    </tbody>
 </table>
 <br>
 <br>

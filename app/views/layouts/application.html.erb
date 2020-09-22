@@ -28,23 +28,30 @@
           <p class="navbar-brand">Task List</p>
           <li><%= link_to 'タスク登録', new_task_path %></li>
           <li><%= link_to 'タスク一覧', tasks_path %></li>
-          <li><a href="">アカウント詳細</a></li>
-          <li><a href="">ログアウト</a></li>
+         
+          
+          <!-- <li><a href="">ログアウト</a></li> -->
         </ul>
       </div>
     </nav>
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
+
     <% if logged_in? %>
       <%= link_to "Profile", user_path(current_user.id) %>
       <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      <% if current_user.admin? %>
+        <%= link_to "管理者画面", admin_users_path %>
+      <% end %>
     <% else %>
       <%= link_to "Sign up", new_user_path %>
       <%= link_to "Login", new_session_path %>
     <% end %> 
+    <h3>ログインユーザー   <%= current_user.name %></h3>
     <%= yield %>
   </body>
+
   <br>
   <footer>
     <p>運営会社  Sakana Web Service Company</p>
