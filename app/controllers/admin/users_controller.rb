@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit]
+  # before_action :set_user, only: [:show, :edit]
 
   def new
     @users = User.new
@@ -17,9 +17,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    @users = User.new(user_params)
   end
 
   def show
+    @users = User.new(user_params)
   end
 
   def index
