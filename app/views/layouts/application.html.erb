@@ -28,7 +28,7 @@
           <p class="navbar-brand">Task List</p>
           <li><%= link_to 'タスク登録', new_task_path %></li>
           <li><%= link_to 'タスク一覧', tasks_path %></li>
-         
+          
           
           <!-- <li><a href="">ログアウト</a></li> -->
         </ul>
@@ -39,16 +39,17 @@
     <% end %>
 
     <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+    <button type="button" class="btn btn-info"><%= link_to "Profile", user_path(current_user.id) %></button>
+      <button type="button" class="btn btn-danger"><%= link_to "Logout", session_path(current_user.id), method: :delete %></button>
       <% if current_user.admin? %>
-        <%= link_to "管理者画面", admin_users_path %>
+      <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一覧", admin_users_index_path %></button>
+      <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一作成", admin_users_new_path %></button>
       <% end %>
     <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
+    <button type="button" class="btn btn-info"><%= link_to "Sign up", new_user_path %></button>
+      <button type="button" class="btn btn-primary"><%= link_to "Login", new_session_path %></button>
     <% end %> 
-    <h3>ログインユーザー   <%= current_user.name %></h3>
+    
     <%= yield %>
   </body>
 
