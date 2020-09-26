@@ -41,11 +41,11 @@
     <% if logged_in? %>
       <button type="button" class="btn btn-info"><%= link_to "Profile", user_path(current_user.id) %></button>
       <button type="button" class="btn btn-danger"><%= link_to "Logout", session_path(current_user.id), method: :delete %></button>
-      <h5><%= current_user.name %>のページ</h5>
+      <h4><%= current_user.name %>としてログイン中</h4>
 
       <% if current_user.admin? %>
-      <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一覧", admin_users_index_path %></button>
-      <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一作成", admin_users_new_path %></button>
+      <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一覧", admin_users_path %></button>
+      <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一作成", new_admin_user_path %></button>
       <% end %>
     <% else %>
     <button type="button" class="btn btn-info"><%= link_to "Sign up", new_user_path %></button>
