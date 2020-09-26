@@ -37,20 +37,22 @@
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
-
+    
     <% if logged_in? %>
-    <button type="button" class="btn btn-info"><%= link_to "Profile", user_path(current_user.id) %></button>
+      <button type="button" class="btn btn-info"><%= link_to "Profile", user_path(current_user.id) %></button>
       <button type="button" class="btn btn-danger"><%= link_to "Logout", session_path(current_user.id), method: :delete %></button>
+      <h5><%= current_user.name %>のページ</h5>
+
       <% if current_user.admin? %>
       <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一覧", admin_users_index_path %></button>
       <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一作成", admin_users_new_path %></button>
       <% end %>
     <% else %>
     <button type="button" class="btn btn-info"><%= link_to "Sign up", new_user_path %></button>
-      <button type="button" class="btn btn-primary"><%= link_to "Login", new_session_path %></button>
     <% end %> 
-    
+
     <%= yield %>
+
   </body>
 
   <br>
