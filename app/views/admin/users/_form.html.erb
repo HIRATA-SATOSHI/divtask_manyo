@@ -1,15 +1,4 @@
-<%= form_with(model: [:admin @user] local: true) do |form| %>
-    <% if task.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
-  
-        <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
   
     <div class="user_list">
       <%= form.label :name %>
@@ -22,7 +11,7 @@
     </div>
 
     <div class="user_list">
-      <%= form.label :admin %>
+      <%= form.label :管理者権限 %>
       <%= form.check_box :admin %>
     </div>
 
@@ -38,4 +27,4 @@
     
       <%= form.submit %>
   
-  <% end %>
+<% end %>

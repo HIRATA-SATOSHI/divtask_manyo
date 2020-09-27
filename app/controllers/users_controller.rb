@@ -17,6 +17,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user.id), notice: "投稿を編集しました！"
+    else
+      render :edit
+    end
+  end
+
   def show
     @user = User.find(params[:id])
   end
@@ -24,6 +32,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
+  
 
   private
   def user_params
