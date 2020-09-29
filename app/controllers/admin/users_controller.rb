@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :destroy]
+  before_action :set_user, only: [:show, :edit, :show, :destroy, :update]
   before_action :require_admin
 
   def new
@@ -9,6 +9,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
+    binding.pry
     @user = User.new(user_params)
     if @user.save
       redirect_to admin_users_path, notice: "ユーザー「#{@user.name}」を登録しました。"
@@ -23,7 +24,8 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_user_path(@user), notice: 更新しました！
+      flash[:notice] =  "ユーザー #{@user.name} 更新しました"
+      redirect_to admin_users_path
     else
       render :edit
     end
@@ -41,7 +43,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:notice] = "ユーザー #{@user.name} を削除しました"
-    redirect_to admin_user_path
+    redirect_to admin_users_path
   end
  
   private
