@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :ensure_correct_user, only: [:show]
   skip_before_action :login_required
   # before_action :set_user, only: [:show, :edit]
 
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-  
+
 
   private
   def user_params
