@@ -27,7 +27,7 @@ class Admin::UsersController < ApplicationController
       flash[:notice] =  "ユーザー #{@user.name} 更新しました"
       redirect_to admin_users_path
     else
-      render :edit
+      render :edit, notice: "管理者がいなくなります！ #{@user.name} の管理者を外して更新ができません！すまん。"
     end
   end
 
@@ -41,9 +41,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    flash[:notice] = "ユーザー #{@user.name} を削除しました"
-    redirect_to admin_users_path
+    if@user.destroy
+      redirect_to admin_users_path, notice: "ユーザー #{@user.name} を削除しました"
+    else
+      redirect_to admin_users_path, notice: "管理者がいなくなります！ #{@user.name} を削除できません！すまんね。"
+    end
   end
  
   private
