@@ -37,7 +37,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.all.includes(:tasks)
   end
 
   def destroy
@@ -56,7 +56,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def require_admin
-      redirect_to root_path unless current_user.admin?
+    unless current_user.admin?
+      redirect_to tasks_path, notice: "あなたは管理者ではありません"
+    end
   end
 
   def set_user

@@ -8,7 +8,7 @@ FactoryBot.define do
       deadline { DateTime.now }
       status {'completed'}
       priority {'high'}
-      user
+      user_id { 1 }
     end
     # 作成するテストデータの名前を「second_task」とします
     # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
@@ -18,7 +18,7 @@ FactoryBot.define do
       deadline { DateTime.tomorrow }
       status {'not_yet'}
       priority {'middle'}
-      user
+      user_id { 1 }
     end
 
     factory :third_task, class: Task do
@@ -27,6 +27,6 @@ FactoryBot.define do
       deadline { DateTime.now.since(5.days) }
       status {'in_progress'}
       priority {'low'}
-      user
+      user_id { 1 }
     end    
   end
