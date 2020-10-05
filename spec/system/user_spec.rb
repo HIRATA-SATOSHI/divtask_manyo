@@ -25,8 +25,10 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能・管理�
   describe 'session機能テスト' do
     before do
       @user = FactoryBot.create(:user)
+      @second_user = FactoryBot.create(:second_user)
     end
-    context "ログインしていない状態でユーザデータがある場合"
+
+    context "ログインしていない状態でユーザデータがある場合" do
       it 'ログインができること' do
         visit new_session_path
         fill_in 'session_email', with: @user.email
@@ -36,25 +38,31 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能・管理�
       end
     end
 
-    context '一般ユーザでログインしている場合' do
+    context 'ログインしている場合' do
+      before do
+        visit new_session_path
+        fill_in 'session_email', with: @user.email
+        fill_in 'session_password', with: @user.password
+        click_on "Log in"        
+      end
+
       it '自分の詳細画面に飛べること' do
         visit user_path(id: @user.id)
-        expect(page).to have_content 'test_user_01のページ'
-        expect(page).to have_content 'メールアドレス : test_user_01@test.com'
-      end  
+        expect(current_path).to eq user_path(id: @user.id)
+      end 
       
       it "一般ユーザが他人の詳細画面に飛ぶとタスク一覧ページに遷移すること" do
-        @admin_user = FactoryBot.create(:second_user)
-        visit user_path(id: @admin_user.id)
+        visit user_path(2)
         expect(page).to have_content "権限がありません。ログインしてください。"
       end
 
-      it "ログアウトができること" do
-        click_on 'Logout'
-        expect(current_path).to eq root_path
-      end      
-    end
-
+      it "ログイン画面に戻る" do
+        visit user_path(id: @user.id)
+        click_link "Logout"
+        expect(page).to have_content "ログアウトしました"
+      end
+    end     
+  end
 
 end
 

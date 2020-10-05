@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:show]
   skip_before_action :login_required
-  # before_action :set_user, only: [:show, :edit]
+  before_action :set_user, only: [:show, :edit]
 
   def new
     @user = User.new
@@ -27,11 +27,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
 
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
 
-  # def set_user
-  #   @user = User.find(params[:id])
-  # end
+  def set_user
+    @user = User.find(params[:id])
+  end
 end
