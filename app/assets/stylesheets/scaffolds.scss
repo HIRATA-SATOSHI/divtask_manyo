@@ -8,6 +8,24 @@ body {
   text-align: center;
 }
 
+html,body{
+  height: 100%;
+  
+}
+
+div.wrap{
+	min-height:100%;
+	position: relative;
+	padding-bottom: 100px;
+	box-sizing: border-box;
+
+}
+
+div.contents{
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
 .p navbar-brand {
   font-size: large;
 }
@@ -153,12 +171,16 @@ ul {
 //   margin-bottom: 50px;
 // }
 
+
+
+
 footer {
   background-color:#9999CC;
   font-family: verdana, arial, helvetica, sans-serif;
   text-align: center;
   color: whitesmoke;
   // margin-top: 50px;
+  height: 50px;
   bottom: 0;
   position: absolute;
   width: 99.3%;
