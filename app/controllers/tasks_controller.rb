@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :current_user, only:[:edit, :update, :destroy]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
@@ -6,15 +7,15 @@ class TasksController < ApplicationController
   def index
     # @tasks = Task.all.order(created_at: :desc)
     if params[:sort_expired]
-      @tasks = Task.all
+      @tasks = current_user.tasks
       @tasks = @tasks.order(deadline: :desc)
     else
-      @tasks = Task.all
+      @tasks = current_user.tasks
       @tasks = @tasks.order(created_at: :desc)
     end  
 
     if params[:sort_priority_high]
-      @tasks = Task.all
+      @tasks = current_user.tasks      
       @tasks = @tasks.order(priority: :asc)
     end
   
@@ -55,7 +56,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'タスクを登録しました！' }
@@ -98,6 +99,6 @@ class TasksController < ApplicationController
   end    
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 end

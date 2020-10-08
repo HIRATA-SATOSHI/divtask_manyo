@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TaskManyo</title>
+    <title>タスク管理</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <!-- コード追加　Bootstrap CSS読み込みコード-->
+    <!-- コード追加 Bootstrap CSS読み込みコード-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -12,32 +12,53 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark bg-primary">
-      <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
-          <span class="sr-only">Task List</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      </div>
-      <div id="gnavi" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <p class="navbar-brand">Task List</p>
-          <li><%= link_to 'タスク登録', new_task_path %></li>
-          <li><%= link_to 'タスク一覧', tasks_path %></li>
-          <li><a href="">アカウント詳細</a></li>
-          <li><a href="">ログアウト</a></li>
-        </ul>
-      </div>
-    </nav>
-    <%= yield %>
+    <div class="wrap" >
+      <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
+            <span class="sr-only">Task List</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <p class="navbar-brand">Task List</p>
+            <li><%= link_to 'タスク登録', new_task_path %></li>
+            <li><%= link_to 'タスク一覧', tasks_path %></li>
+          </ul>
+        </div>
+      </nav>
+
+    <div class="contents">  
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+    
+      <% if logged_in? %>
+        <button type="button" class="btn btn-info"><%= link_to "Profile", user_path(current_user.id) %></button>
+        <button type="button" class="btn btn-danger"><%= link_to "Logout", session_path(current_user.id), method: :delete %></button>
+        <h4><%= current_user.name %>としてログイン中</h4>
+
+      <% if current_user.admin? %>
+        <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一覧", admin_users_path %></button>
+        <button type="button" class="btn btn-warning"><%= link_to "管理者用ユーザ一作成", new_admin_user_path %></button>
+      <% end %>
+      <% else %>
+        <button type="button" class="btn btn-info"><%= link_to "Sign up", new_user_path %></button>
+      <% end %> 
+    
+      <%= yield %>
+    </div>
+    <br>
+    <footer class="footer">
+      <p>運営会社  Sakana Web Service Company</p>
+      <p>© 2020 Copyright Sakana Web Service Company</p>
+    </footer>
+
+   </div>
   </body>
-  <br>
-  <footer>
-    <p>運営会社  Sakana Web Service Company</p>
-    <p>© 2020 Copyright Sakana Web Service Company</p>
-  </footer>
 </html>
