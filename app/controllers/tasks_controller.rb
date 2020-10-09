@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     # @tasks = Task.all.order(created_at: :desc)
-    
+    # binding.pry
     if params[:sort_expired]
       @tasks = current_user.tasks
       @tasks = @tasks.order(deadline: :desc)
@@ -32,6 +32,7 @@ class TasksController < ApplicationController
 
        #渡されたパラメータがステータスのみだったとき
       elsif params[:task][:status].present?
+        @tasks = Task.all
         @tasks =@tasks.where(status: params[:task][:status])
 
        #渡されたパラメータがラベルのみだったとき    
