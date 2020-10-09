@@ -27,7 +27,7 @@ class TasksController < ApplicationController
         @tasks =@tasks.where(status: params[:task][:status])
         
         #渡されたパラメータがtask nameのみだったとき
-      elsif params[:task].present?
+      elsif params[:task][:name].present?
         @tasks = @tasks.where('name LIKE ?', "%#{params[:task][:name]}%")
 
        #渡されたパラメータがステータスのみだったとき
