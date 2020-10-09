@@ -14,6 +14,9 @@ module TaskManyo
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     config.generators do |g|
+      g.javascripts false
+      g.helper false
+      g.test_framework false
       g.test_framework :rspec,
                        model_specs: true,
                        view_specs: false,

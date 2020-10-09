@@ -34,11 +34,22 @@
     <%= form.label :status %>
     <%= form.select :status, Task.statuses.keys.map {|k| [I18n.t("enums.tasks.status.#{k}"), k]}, include_blank: "選択して下さい" %>
   </div>
+
   <br>
+
   <div class="task_list">
-  <%= form.label :priority %>
-  <%= form.select :priority, Task.priorities.keys.map {|k| [I18n.t("enums.tasks.priority.#{k}"), k]}, include_blank: "選択して下さい" %>
+    <%= form.label :priority %>
+    <%= form.select :priority, Task.priorities.keys.map {|k| [I18n.t("enums.tasks.priority.#{k}"), k]}, include_blank: "選択して下さい" %>
   </div> 
+
+  <br>
+
+  <div class="task_list">
+    <% Label.all.each do |label| %>
+      <%=form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <%= label.name %>
+    <% end %> 
+  </div>
 
   <br>
 
