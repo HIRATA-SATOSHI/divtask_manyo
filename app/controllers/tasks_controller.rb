@@ -32,7 +32,7 @@ class TasksController < ApplicationController
 
        #渡されたパラメータがステータスのみだったとき
       elsif params[:task][:status].present?
-        @tasks = Task.all
+        # @tasks = Task.all
         @tasks =@tasks.where(status: params[:task][:status])
 
        #渡されたパラメータがラベルのみだったとき    
