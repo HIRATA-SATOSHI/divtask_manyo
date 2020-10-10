@@ -19,9 +19,9 @@ RSpec.configure do |config|
   # assertions if you prefer.
 
     # 「headless_chromeのno-sandboxオプション」を追加する
-    config.before(:each) do |example|
-      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400], options: { args: ['no-sandbox'] } if example.metadata[:type] == :system
-    end
+    # config.before(:each) do |example|
+    #   driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400], options: { args: ['no-sandbox'] } if example.metadata[:type] == :system
+    # end
 
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
