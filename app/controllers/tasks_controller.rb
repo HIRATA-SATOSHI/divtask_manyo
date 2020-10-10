@@ -5,8 +5,6 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    # @tasks = Task.all.order(created_at: :desc)
-    # binding.pry
     if params[:sort_expired]
       @tasks = current_user.tasks
       @tasks = @tasks.order(deadline: :desc)
@@ -19,7 +17,7 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks      
       @tasks = @tasks.order(priority: :asc)
     end
-
+    
     if params[:task].present?
       if params[:task][:name].present? && params[:task][:status].present?
         #両方name and statusが成り立つ検索結果を返す
@@ -34,10 +32,10 @@ class TasksController < ApplicationController
       elsif params[:task][:status].present?
         # @tasks = Task.all
         @tasks =@tasks.where(status: params[:task][:status])
+       #渡されたパラメータがラベルのみだったとき
 
-       #渡されたパラメータがラベルのみだったとき    
       elsif params[:task][:label_id].present?
-        @labeling = Labeling.where(label_id: params[:label_id]).pluck(:task_id)
+        @labeling = Labeling.where(label_id: params[:task][:label_id]).pluck(:task_id)
         @tasks = @tasks.where(id: @labeling) 
       end
     end
