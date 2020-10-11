@@ -18,13 +18,12 @@
 end
 
 User.create!(name:  "管理者",
-  email: "admin@example.jp",ß
+  email: "admin@example.jp",
   password:  "11111111",
   password_confirmation: "11111111",
   admin: true)
 
 20.times do |n|
-  binding.pry
   name = Faker::Games::Pokemon.name
   detail = Faker::Games::Pokemon.location
   deadline = Faker::Date.between(from: Date.tomorrow, to: 7.days.since)
@@ -35,7 +34,6 @@ end
 
 
 20.times do |n|
-  binding.pry
   label = ["開発", "設計", "テスト"]
   Label.create!(name: label)
 end
