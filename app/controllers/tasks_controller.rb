@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    # @tasks = Task.all.order(created_at: :desc)
     if params[:sort_expired]
       @tasks = current_user.tasks
       @tasks = @tasks.order(deadline: :desc)
@@ -18,7 +17,7 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks      
       @tasks = @tasks.order(priority: :asc)
     end
-  
+    
     if params[:task].present?
       if params[:task][:name].present? && params[:task][:status].present?
         #両方name and statusが成り立つ検索結果を返す
@@ -28,14 +27,21 @@ class TasksController < ApplicationController
         #渡されたパラメータがtask nameのみだったとき
       elsif params[:task][:name].present?
         @tasks = @tasks.where('name LIKE ?', "%#{params[:task][:name]}%")
-      
+
        #渡されたパラメータがステータスのみだったとき
       elsif params[:task][:status].present?
+        # @tasks = Task.all
         @tasks =@tasks.where(status: params[:task][:status])
+       #渡されたパラメータがラベルのみだったとき
+
+      elsif params[:task][:label_id].present?
+        @labeling = Labeling.where(label_id: params[:task][:label_id]).pluck(:task_id)
+        @tasks = @tasks.where(id: @labeling) 
       end
     end
 
     @tasks = @tasks.page(params[:page]).per(5)
+
   end
 
   # GET /tasks/1
@@ -95,7 +101,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
   def task_params
-    params.require(:task).permit(:name, :detail, :deadline, :status, :priority)
+    params.require(:task).permit(:name, :detail, :deadline, :status, :priority, label_ids: [])
   end    
 
   def set_task

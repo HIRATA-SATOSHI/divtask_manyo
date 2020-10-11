@@ -1,19 +1,48 @@
 <p id="notice"><%= notice %></p>
 
+<br>
 <p>
   <strong>Name:</strong>
   <%= @task.name %>
 </p>
-
+<br>
 <p>
   <strong>Detail:</strong>
   <%= @task.detail %>
 </p>
-
+<br>
 <p>
   <strong>Deadline:</strong>
   <%= @task.deadline %>
 </p>
+<br>
+<p>
+  <strong>priority:</strong>
+  <%= @task.priority %>
+</p>
+<br>
+<p>
+  <strong>status:</strong>
+  <%= @task.status %>
+</p>
+<br>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<p>
+  <strong>label name:</strong>
+  <% @task.labels.each do |label| %>
+    <%= label.name %><br>
+  <% end %>
+</p>
+<br>
+<p>
+  <strnog> 作成日時:</strong>
+  <%= @task.created_at %>
+</p>
+<p>
+  <strnog> 更新日時:</strong>
+  <%= @task.updated_at %>
+</p>
+<br>
+<br>
+<button type="button" class="btn btn-success btn-sm"><%= link_to 'Edit', edit_task_path(@task) %></button>
+<button type="button" class="btn btn-info btn-sm"><%= link_to 'Back', tasks_path %></button>
