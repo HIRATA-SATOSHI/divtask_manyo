@@ -24,6 +24,7 @@ User.create!(name:  "管理者",
   admin: true)
 
 20.times do |n|
+  # binding.irb
   name = Faker::Games::Pokemon.name
   detail = Faker::Games::Pokemon.location
   deadline = Faker::Date.between(from: Date.tomorrow, to: 7.days.since)
@@ -33,10 +34,26 @@ User.create!(name:  "管理者",
 end
 
 
-20.times do |n|
-  label = ["開発", "設計", "テスト"]
-  Label.create!(name: label)
-end
+# 20.times do |n|
+#   label = ["開発", "設計", "テスト"]
+#   Label.create!(name: label)
+# end
+
+# ["開発", "設計", "テスト"].each do |label|
+#   puts label
+# end
+
+Label.create!(
+  name: '開発'
+)
+
+Label.create!(
+  name: '設計'
+)
+
+Label.create!(
+  name: 'テスト'
+)
 
 20.times do |n|
     Labeling.create!(task_id: rand(1..20), label_id: rand(1..16))
