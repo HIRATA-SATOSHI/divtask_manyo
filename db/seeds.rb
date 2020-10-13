@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 15.times do |n|
   name = Faker::Games::Pokemon.name
   email = Faker::Internet.email
@@ -51,16 +43,3 @@ Label.create!(
 end
 
 
-# 20.times do |n|
-#   label = ["開発", "設計", "テスト"]
-#   Label.create!(name: label0, name:label1, name:label2)
-    
-# end
-
-# Label.create!(name: '開発', name: '開発', name: '設計')
-
-
-
-# ["開発", "設計", "テスト"].each do |label|
-#   puts label
-# end
