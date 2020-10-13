@@ -37,7 +37,6 @@ Label.create!(
   name: 'テスト'
 )
 
-
 20.times do |n|
     Labeling.create!(task_id: rand(1..20), label_id: rand(1..3))
 end
