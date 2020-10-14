@@ -32,8 +32,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    # binding.pry
-    # @user = User.find(user_params[:id])
+
   end
 
   def index
